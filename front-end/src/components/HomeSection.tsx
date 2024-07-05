@@ -1,37 +1,51 @@
-import { Avatar } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
+import { ChangeEvent, useState } from "react";
 import { useFormik } from "formik";
-import ImageIcon from '@mui/icons-material/Image'
-import * as Yup from 'yup';
+import ImageIcon from "@mui/icons-material/Image";
+import * as Yup from "yup";
+import { FmdGood, TagFaces } from "@mui/icons-material";
 
 const validationSchema = Yup.object().shape({
-  content: Yup.string().required("Tweet text is required")
-})
+  content: Yup.string().required("Tweet text is required"),
+});
 
 export default function HomeSection() {
-  const handleSubmit = (values: { content: string, image: string }) => {
-    console.log("values", values)
-  }
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  // to manager our states to send the data.
+  const handleSubmit = (values: { content: string; image: File | null }) => {
+    console.log("values", values);
+  };
+
   const formik = useFormik({
     initialValues: {
       content: "",
-      image: "",
+      image: null,
     },
     onSubmit: handleSubmit,
     validationSchema,
   });
 
-  const handleSelectImage = (file: ) => {
-
-  }
+  const handleSelectImage = (event: ChangeEvent<HTMLInputElement>) => {
+    setUploadingImage(true);
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const imgFile = files[0];
+      formik.setFieldValue("image", imgFile);
+      setSelectedImage(imgFile);
+      console.log(uploadingImage);
+    } else {
+      setUploadingImage(false); // Reset the uploading state if no file is selected
+      console.log(selectedImage);
+    }
+  };
 
   return (
     <div className="space-y-5">
       <section>
         <h1 className="py-5 text-xl font-bold placeholder-opacity-90">Home</h1>
       </section>
-      <section className={`pb-10`}>
+      <section className="pb-10">
         <div className="flex">
           <Avatar
             alt="username"
@@ -49,13 +63,39 @@ export default function HomeSection() {
                 {formik.touched.content && formik.errors.content ? (
                   <span className="text-red-500">{formik.errors.content}</span>
                 ) : null}
-                
               </div>
-              <div className="flex justify-between items-cneter mt-5">
+              <div className="flex justify-between items-center mt-5">
                 <div className="flex space-x-5 items-center">
-                  <ImageIcon className="text-[#1d9bf0]" />
-                  <input type="file" name="imageFile" className="hidden" onChange={handleSelectImage} />
+                  <label
+                    htmlFor="imageFile"
+                    className="flex items-center space-x-2 rounded-md cursor-pointer"
+                  >
+                    <ImageIcon className="text-[#1d9bf0]" />
+                    <input
+                      type="file"
+                      id="imageFile"
+                      name="imageFile"
+                      className="hidden"
+                      onChange={handleSelectImage}
+                    />
+                  </label>
+                  <FmdGood className="text-[#1d9bf0]" />
+                  <TagFaces className="text-[#1d9bf0]" />
                 </div>
+              </div>
+              <div>
+                <Button
+                  sx={{
+                    width: "100%",
+                    borderRadius: "20px",
+                    paddingY: "8px",
+                    paddingX: "20px",
+                    bgColor: "#1d9bf0",
+                  }}
+                  variant="contained"
+                >
+                  Tweet
+                </Button>
               </div>
             </form>
           </div>
