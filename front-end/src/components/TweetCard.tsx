@@ -1,9 +1,28 @@
 // import { Repeat } from "@mui/icons-material";
-import { Avatar } from "@mui/material";
-import { useNavigate } from 'react-router-dom'
+import { MoreHoriz } from "@mui/icons-material";
+import { Avatar, Button, Menu, MenuItem } from "@mui/material";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function TweetCard() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleDeleteTweet = () => {
+    console.log("deleted!");
+    handleClose();
+  };
+  const handleEditTweet = () => {
+    console.log("twet updated!");
+    handleClose();
+  };
+
 
   return (
     <div className="">
@@ -18,16 +37,44 @@ function TweetCard() {
           className="cursor-pointer"
           onClick={() => navigate("/profile/${6}")}
         />
-      </div>
-      <div className="w-full">
-        <div className="flex justify-between items-center">
+        <div className="w-full">
+          <div className="flex justify-between items-center">
             <div className="flex cursor-pointer space-x-2">
-
+              <span className="font-semibold">Code with Guih❤️</span>
+              <span className="text-gray-600">@Guilhermefonseca2021 . 2m </span>
+              <img
+                className="ml-2 w-5 h-5"
+                src="https://pixnio.com/free-images/2017/09/26/2017-09-26-09-42-06.jpg"
+                alt="title of the cape"
+              />
             </div>
+            <div>
+              <Button
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <MoreHoriz />
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={handleDeleteTweet}>Delete</MenuItem>
+                <MenuItem onClick={handleEditTweet}>Edit</MenuItem>
+                </Menu>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
   );
 }
 

@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import ImageIcon from "@mui/icons-material/Image";
 import * as Yup from "yup";
 import { FmdGood, TagFaces } from "@mui/icons-material";
+import TweetCard from "./TweetCard";
 
 const validationSchema = Yup.object().shape({
   content: Yup.string().required("Tweet text is required"),
@@ -79,8 +80,8 @@ export default function HomeSection() {
                       onChange={handleSelectImage}
                     />
                   </label>
-                  <FmdGood className="text-[#1d9bf0]" />
-                  <TagFaces className="text-[#1d9bf0]" />
+                  <FmdGood className="text-[#1d9bf0] cursor-pointer" />
+                  <TagFaces className="text-[#1d9bf0] cursor-pointer" />
                 </div>
               </div>
               <div>
@@ -100,6 +101,9 @@ export default function HomeSection() {
             </form>
           </div>
         </div>
+      </section>
+      <section>
+        <TweetCard />
       </section>
     </div>
   );
