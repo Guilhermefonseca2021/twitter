@@ -103,7 +103,7 @@ export default function HomeSection() {
         </div>
       </section>
       <section>
-        <TweetCard />
+        {[1,1,1,1].map(() => <TweetCard />)}
       </section>
     </div>
   );
