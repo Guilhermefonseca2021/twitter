@@ -31,11 +31,11 @@ export default function Navigation() {
             src={LogoTwitter}
           />
         </div>
-        <div className="space-y-6">
+        <div className="space-y-4">
           {navigationMenu.map((item) => (
             <div
               key={item.title}
-              className="flex items-center space-x-2 cursor-pointer"
+              className="flex items-center space-x-1 cursor-pointer"
               onClick={() =>
                 item.title === "Profile"
                   ? navigate(`/profile/${5}`)
@@ -47,12 +47,12 @@ export default function Navigation() {
             </div>
           ))}
         </div>
-        <div className="py-10">
+        <div className="py-4">
           <Button
             sx={{
               width: "100%",
               borderRadius: "29px",
-              py: "15px",
+              py: "5px",
               bgColor: "#1d9bf0",
             }}
             variant="contained"
@@ -62,7 +62,7 @@ export default function Navigation() {
         </div>
       </div>
       <div className="flex items-center justify-between">
-        <div className="flex item-center space-x-3">
+        <div className="flex item-center space-x-1">
           <Avatar alt="username" src="" />
           <div>
             <span>Code with Guih❤️</span>
