@@ -40,13 +40,19 @@ You need to have Java (version 17+), Node.js, and Visual Studio Code installed o
 
 ```bash
 // Clone the repository to your local development environment.
-$ git clone https://github.com/YourUsername/TwitterCloneBackend
+$ git clone https://github.com/YourUsername/Twitter
 
 // Navigate to the project directory
-$ cd TwitterCloneBackend
+$ cd back-end
 
 // Run the server
 $ ./mvnw spring-boot:run
+
+// and run the server client in another window, get in in the another path.
+$  cd front-end
+
+// Run the server.
+$  npm run dev
 ```
 
 made with 💜 by GUILHERME FONSECA 👋 [See my LinkedIn](https://www.linkedin.com/in/guilherme-fonseca-dos-santos-a49594207/)

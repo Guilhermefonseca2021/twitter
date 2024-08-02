@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import Navigation from "../components/Navigation";
-import HomeSection from "../components/HomeSection";
 import RightPart from "../components/RightPart";
+import Router from "../routes";
 
 function Home() {
   return (
@@ -9,8 +9,13 @@ function Home() {
       <Grid item xs={0} lg={2.5} className="lg-block w-full relative">
         <Navigation />
       </Grid>
-      <Grid item xs={12} lg={6} className="px-5 lg:px-9 lg-block w-full relative ">
-        <HomeSection />
+      <Grid
+        item
+        xs={12}
+        lg={6}
+        className="px-5 lg:px-9 lg-block w-full relative "
+      >
+        <Router />
       </Grid>
       <Grid item xs={0} lg={3} className="lg-block w-full relative">
         <RightPart />
