@@ -4,12 +4,19 @@ import {
   KeyboardBackspace,
   LocationOn,
 } from "@mui/icons-material";
-import { Avatar, Box, Button, Tab, TabList, TabContext, TabelPanel } from "@mui/material";
-import { useState } from "react";
+import Box from "@mui/material/Box";
+import { Avatar, Button } from "@mui/material";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TweetCard from "../components/TweetCard";
+import ProfileModel from "../components/ProfileModel";
 
 export default function Profile() {
-  const [tabValue, setTableValue] = useState('1');
+  const [tabValue, setTabValue] = useState("1");
   const navigate = useNavigate();
   const handleBack = () => navigate(-1);
   const handleOpenProfileModel = () => {
@@ -19,17 +26,22 @@ export default function Profile() {
     console.log("following user.");
   };
 
-  const handleChange = () => {
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    setTabValue(newValue);
 
+    if (newValue === "4") {
+      console.log("likes twits");
+    } else if (newValue === "1") {
+      console.log("user twits");
+    }
   };
 
   const isMyProfile = true;
   const isFollowing = true;
-  const value = 1;
 
   return (
     <div>
-      <section className={`z-50 flex items-center sticky top-0 bg-opacity-95`}>
+      <section className="z-50 flex items-center sticky top-0 bg-opacity-95">
         <KeyboardBackspace className="cursor-pointer" onClick={handleBack} />
         <h1 className="py-3 text-xl font-bold opacity-90 ml-5">
           Code with Guih
@@ -37,15 +49,14 @@ export default function Profile() {
       </section>
       <section>
         <img
-          className="w-[100%] h-[10rem] object-cover "
+          className="w-full h-40 object-cover"
           src="https://media.licdn.com/dms/image/D4E16AQFYHULIwBjYjg/profile-displaybackgroundimage-shrink_350_1400/0/1709664823673?e=1727913600&v=beta&t=qaJ6LL8adkQPgCDZrfGNstd9Jkz0tCNJ32VUPVpUlao"
-          alt=""
+          alt="background"
         />
       </section>
       <section className="pl-6">
-        <div className="flex justify-between items-center h-[5rem]">
+        <div className="flex justify-between items-center h-20">
           <Avatar
-            // className="transform translate-y-24" to move the image more to high
             src="https://www.linkedin.com/in/guilherme-fonseca-dos-santos-a49594207/"
             alt="code with guih"
             sx={{ width: "6rem", height: "6rem", border: "4px solid white" }}
@@ -53,7 +64,6 @@ export default function Profile() {
           {isMyProfile ? (
             <Button
               onClick={handleOpenProfileModel}
-              className="rounded-full"
               variant="contained"
               sx={{ borderRadius: "20px" }}
             >
@@ -62,11 +72,10 @@ export default function Profile() {
           ) : (
             <Button
               onClick={handleFollowUser}
-              className="rounded-full"
               variant="contained"
               sx={{ borderRadius: "20px" }}
             >
-              {isFollowing ? "Follow" : "Unfollow"}
+              {isFollowing ? "Unfollow" : "Follow"}
             </Button>
           )}
         </div>
@@ -77,7 +86,7 @@ export default function Profile() {
               <img
                 className="ml-2 w-5 h-5"
                 src="https://www.pngmart.com/files/12/Twitter-Verified-Badge-PNG-Transparent-Image.png"
-                alt="title of the cape"
+                alt="verified"
               />
             )}
           </div>
@@ -114,19 +123,32 @@ export default function Profile() {
           </div>
         </div>
       </section>
+      <section className="py-5">
+        <Box sx={{ width: "100%", typography: "body1" }}>
+          <TabContext value={tabValue}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabList onChange={handleTabChange} aria-label="profile tabs">
+                <Tab label="Tweets" value="1" />
+                <Tab label="Replies" value="2" />
+                <Tab label="Media" value="3" />
+                <Tab label="Likes" value="4" />
+              </TabList>
+            </Box>
+            <TabPanel value="1">
+              {[1, 1, 1, 1].map(() => <TweetCard />)}
+            </TabPanel>
+            <TabPanel value="2">
+
+            </TabPanel>
+            <TabPanel value="3">
+
+            </TabPanel>
+            <TabPanel value="4"></TabPanel>
+          </TabContext>
+        </Box>
+      </section>
       <section>
-        <TabContext value={tsbValue}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Item One" value="1" />
-              <Tab label="Item Two" value="2" />
-              <Tab label="Item Three" value="3" />
-            </TabList>
-          </Box>
-          <TabelPanel value="1">Item One</TabelPanel>
-          <TabelPanel value="2">Item Two</TabelPanel>
-          <TabelPanel value="3">Item Three</TabelPanel>
-        </TabContext>
+        <ProfileModel />
       </section>
     </div>
   );

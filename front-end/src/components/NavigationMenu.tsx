@@ -5,10 +5,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MessageIcon from "@mui/icons-material/Message";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import GroupIcon from "@mui/icons-material/Group";
-import Verified from "@mui/icons-material/Verified";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PendingIcon from "@mui/icons-material/Pending";
 import { SvgIconProps } from '@mui/material/SvgIcon';
+import { Verified } from '@mui/icons-material';
 
 interface NavigationItem {
   title: string;

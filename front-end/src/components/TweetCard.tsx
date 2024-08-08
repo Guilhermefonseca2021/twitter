@@ -64,7 +64,7 @@ function TweetCard() {
           <div className="flex justify-between items-center">
             <div className="flex cursor-pointer space-x-2">
               <span className="font-semibold">Code with Guih❤️</span>
-              <span className="text-gray-600">@Guihfonse2021 . 2m </span>
+              <span className="text-gray-600">@Guihfonse . 2m </span>
               <img
                 className="ml-2 w-5 h-5"
                 src="https://www.pngmart.com/files/12/Twitter-Verified-Badge-PNG-Transparent-Image.png"
@@ -98,7 +98,7 @@ function TweetCard() {
           </div>
           <div className="mt-2">
             
-            <div className="cursor-pointer">
+            <div onClick={() => navigate(`/twit/${3}`)} className="cursor-pointer">
               <p className="mb-2">
                 twitter clone - Full Stack spring boot project and react.
               </p>
